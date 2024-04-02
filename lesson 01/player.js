@@ -1,26 +1,27 @@
 const playList = {
-    
+
     playListInfo: {
         title: 'Hip-hop hits',
         coverImgUrl: './cover.avif',
-        
+
     },
     tracks: [
         {
             trackId: '01',
             trackTitle: 'Rap God',
             artistName: 'Eminem',
-            trackCoverImgUrl: "C:\Users\iZiPC.by\it-incubator precourse lections\lesson 01\eminem.jpg",
             trackFileUrl: './eminem_-_rap_god_(muztune.me).mp3',
+            trackCoverImgUrl: "./eminem.jpg",
         },
         {
             trackId: '02',
             trackTitle: 'In Da Club',
             artistName: '50cent',
-            trackCoverImgUrl: "C:\Users\iZiPC.by\it-incubator precourse lections\lesson 01\50cent.jpg",
             trackFileUrl: './50cent_-_in_da_club_(muztune.me).mp3',
-        }
-            ],
+            trackCoverImgUrl: "./50cent.jpg"
+            
+        },
+    ],
 }
 
 const playListTitleElement = document.createElement('h1');
@@ -40,12 +41,14 @@ for (let i = 0; playList.tracks.length; i++) {
 
     const trackCoverElement = document.createElement('img');
     trackCoverElement.src = playList.tracks[i].trackCoverImgUrl;
-    
+    trackCoverElement.style.width = '150px';
+    trackCoverElement.style.height = '150px';
+
     trackElement.append(trackCoverElement);
-    trackElement.append(playList.tracks[i].artistName + ': ' +  playList.tracks[i].trackTitle);
+    trackElement.append(playList.tracks[i].artistName + ': ' + playList.tracks[i].trackTitle);
     trackListElement.append(trackElement);
 
-   
+
 }
 document.body.append(trackListElement);
 
