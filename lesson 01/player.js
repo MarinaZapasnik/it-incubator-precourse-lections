@@ -70,29 +70,38 @@ function renderPlayListHeader(anyPlayListInfo) {
     playListCoverElement.style.height = '150px';
     document.body.append(playListCoverElement);
 }
-    
-     
-
-
+ 
 function renderTracksList(anyPlayListTracks) {
     const trackListElement = document.createElement('ul');
     
     for (let i = 0; i < anyPlayListTracks.length; i ++) {
-        const trackElement = document.createElement('li');
-    
-        const trackCoverElement = document.createElement('img');
-        trackCoverElement.src = anyPlayListTracks[i].trackCoverImgUrl;
-        trackCoverElement.style.width = '50px';
-        trackCoverElement.style.height = '50px';
-    
-        trackElement.append(trackCoverElement);
-        trackElement.append(anyPlayListTracks[i].artistName + ': ' + anyPlayListTracks[i].trackTitle);
+
+        const trackElement = createTrack(anyPlayListTracks[i]);
+
         trackListElement.append(trackElement);
-    
     
     }
     document.body.append(trackListElement);
+ }
+
+function createTrack(anyTrack) {
     
+        const trackElement = document.createElement('li');
+    
+        const trackCoverElement = document.createElement('img');
+        trackCoverElement.src = anyTrack.trackCoverImgUrl;
+        trackCoverElement.style.width = '50px';
+        trackCoverElement.style.height = '50px';
+
+        const audioTrack = document.createElement('audio');
+        audioTrack.src = anyTrack.trackFileUrl;
+        audioTrack.controls = true;
+    
+        trackElement.append(trackCoverElement);
+        trackElement.append(anyTrack.artistName + ': ' + anyTrack.trackTitle);
+        trackElement.append(audioTrack);
+        
+        return trackElement    
 }
 
 renderPlayList(playList)
