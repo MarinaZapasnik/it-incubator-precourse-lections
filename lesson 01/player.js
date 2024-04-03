@@ -1,8 +1,7 @@
 const playList = {
-
     playListInfo: {
         title: 'Hip-hop hits',
-        coverImgUrl: './cover.avif',
+        coverImgUrl: './cover.avif'
 
     },
     tracks: [
@@ -11,18 +10,19 @@ const playList = {
             trackTitle: 'Rap God',
             artistName: 'Eminem',
             trackFileUrl: './eminem_-_rap_god_(muztune.me).mp3',
-            trackCoverImgUrl: "./eminem.jpg",
+            trackCoverImgUrl: './eminem.jpg'
         },
         {
             trackId: '02',
             trackTitle: 'In Da Club',
             artistName: '50cent',
             trackFileUrl: './50cent_-_in_da_club_(muztune.me).mp3',
-            trackCoverImgUrl: "./50cent.jpg"
-            
+            trackCoverImgUrl: './50cent.jpg'
+
         },
-    ],
+    ]
 }
+
 
 const playListTitleElement = document.createElement('h1');
 playListTitleElement.innerText = playList.playListInfo.title;
@@ -36,21 +36,30 @@ document.body.append(playListCoverElement);
 
 const trackListElement = document.createElement('ul');
 
-for (let i = 0; playList.tracks.length; i++) {
-    const trackElement = document.createElement('li');
 
-    const trackCoverElement = document.createElement('img');
-    trackCoverElement.src = playList.tracks[i].trackCoverImgUrl;
-    trackCoverElement.style.width = '150px';
-    trackCoverElement.style.height = '150px';
 
-    trackElement.append(trackCoverElement);
-    trackElement.append(playList.tracks[i].artistName + ': ' + playList.tracks[i].trackTitle);
-    trackListElement.append(trackElement);
+for (let i = 0; i < playList.tracks.length; i++) {
+
+    const trackElement = document.createElement('li')
+
+    const trackCoverElement = document.createElement('img')
+    trackCoverElement.src = playList.tracks[i].trackCoverImgUrl
+    trackCoverElement.style.width = '50px'
+    trackCoverElement.style.height = '50px'
+
+    trackElement.append(trackCoverElement)
+    trackElement.append(playList.tracks[i].artistName + ': ' + playList.tracks[i].trackTitle)
+    trackListElement.append(trackElement)
 
 
 }
 document.body.append(trackListElement);
+
+//function renderPlayList(anyPlayList){
+    //function
+//}
+
+
 
 
 
