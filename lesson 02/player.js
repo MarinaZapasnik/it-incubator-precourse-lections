@@ -118,12 +118,10 @@ const playLists = [
 //render data:
 renderAllPlayLists(playLists)
 
-function renderAllPlayLists (allPlayLists) {  
-
-for (let i = 0; i < allPlayLists.length; i++) {
-    renderPlayList(allPlayLists[i])
-    
-}
+function renderAllPlayLists(allPlayLists) {
+    for (let i = 0; i < allPlayLists.length; i++) {
+        renderPlayList(allPlayLists[i])
+    }
 }
 
 
@@ -152,20 +150,23 @@ function renderPlayListTracks(anyTracks) {
     document.body.append(tracksListElement)
 }
 
-function renderTrack (anyTrack) {
+function renderTrack(anyTrack) {
     const trackElement = document.createElement('li')
     const coverElement = document.createElement('img')
+
     coverElement.style.width = '50px'
     coverElement.src = anyTrack.trackCoverImageUrl
+
     const audio = document.createElement('audio')
     audio.src = anyTrack.trackFileUrl
-    
     audio.controls = true
+
     trackElement.append(
-        coverElement, 
+        coverElement,
         audio,
         anyTrack.artistName + ': ',
         anyTrack.trackTitle
-        )
+    )
+
     return trackElement
 }
