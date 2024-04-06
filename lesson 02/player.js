@@ -116,6 +116,56 @@ const playLists = [
 
 
 //render data:
+renderAllPlayLists(playLists)
+
+function renderAllPlayLists (allPlayLists) {  
+
+for (let i = 0; i < allPlayLists.length; i++) {
+    renderPlayList(allPlayLists[i])
+    
+}
+}
 
 
+function renderPlayList(anyPlayList) {
+    renderPlayListHeader(anyPlayList.playListInfo)
+    renderPlayListTracks(anyPlayList.tracks)
+}
 
+function renderPlayListHeader(anyPlayListInfo) {
+    const playListCoverElement = document.createElement('img')
+    playListCoverElement.src = anyPlayListInfo.coverImageUrl
+    playListCoverElement.style.width = '150px'
+    document.body.append(playListCoverElement)
+    
+    const playListHeaderTitle = document.createElement('h2');
+    playListHeaderTitle.append(anyPlayListInfo.title);
+    document.body.append(playListHeaderTitle)
+}
+
+function renderPlayListTracks(anyTracks) {
+    const tracksListElement = document.createElement('ul');
+    for (let i = 0; i < anyTracks.length; i++) {
+        const trackElement = renderTrack(anyTracks[i])
+        tracksListElement.append(trackElement)
+    }
+    document.body.append(tracksListElement)
+}
+
+function renderTrack (anyTrack) {
+    const trackElement = document.createElement('li')
+    const coverElement = document.createElement('img')
+    coverElement.style.width = '50px'
+    coverElement.src = anyTrack.trackCoverImageUrl
+    const audio = document.createElement('audio')
+    audio.src = anyTrack.trackFileUrl
+    
+    audio.controls = true
+    trackElement.append(
+        coverElement, 
+        audio,
+        anyTrack.artistName + ': ',
+        anyTrack.trackTitle
+        )
+    return trackElement
+}
