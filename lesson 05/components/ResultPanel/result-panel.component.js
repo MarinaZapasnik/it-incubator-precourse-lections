@@ -1,7 +1,9 @@
+import { getCatchCount, getMissCount } from "../../data.js";
+
 export function ResultPanel() {
-    const element = document.createElement("div");
+    const element = document.createElement('div');
 
-    element.append('RESULT will be here');
+    element.append(`CATCHE: ${getCatchCount()}, MISS: ${(getMissCount())}`);
 
-    return element;
+    return element
 }
