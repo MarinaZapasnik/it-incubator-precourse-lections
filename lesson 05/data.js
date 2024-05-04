@@ -9,8 +9,8 @@ const _data = {
     gameState: GAME_STATES.SETTINGS,
     settings: {
         gridSize: {
-            x: 4,
-            y: 4,
+            x: 3,
+            y: 3,
         },
         pointsToWin: 5,
         pointsToLose: 5
@@ -23,19 +23,32 @@ const _data = {
             x: 0,
             y: 0
         },
-        player1: {},
-        player2: {}
+        player1: {x: 1, y: 1},
+        player2: {x: 2, y: 2}
     }
 }
 
-
-let observer = () => { }
+let observer = () => {}
 
 function changeGoogleCoords() {
     // todo do while prevent generation the same coordinates
-    _data.heroes.google.x = getRandomInt(_data.settings.gridSize.x - 1);
-    _data.heroes.google.y = getRandomInt(_data.settings.gridSize.y - 1);
 
+
+    let newX = _data.heroes.google.x;
+    let newY = _data.heroes.google.y;
+
+
+    do {
+        newX = getRandomInt(_data.settings.gridSize.x - 1);
+        newY = getRandomInt(_data.settings.gridSize.y - 1);
+
+        var newCoordsMatchPlayer1Coords = newX === _data.heroes.player1.x && newY === _data.heroes.player1.y;
+        var newCoordsMatchPlayer2Coords = newX === _data.heroes.player2.x && newY === _data.heroes.player2.y;
+    
+    } while (newCoordsMatchPlayer1Coords || newCoordsMatchPlayer2Coords) // true
+
+    _data.heroes.google.x = newX;
+    _data.heroes.google.y = newY;
 }
 
 /**
@@ -58,7 +71,7 @@ function runGoogleJump() {
             _data.gameState = GAME_STATES.LOSE;
         }
         observer();
-    }, 3000)
+    }, 1000)
 }
 
 function stopGoogleJump() {
@@ -77,6 +90,12 @@ export function setGridSize(x, y) {
 }
 
 export function start() {
+    
+    if (_data.gameState !== GAME_STATES.SETTINGS) {
+       
+        throw new Error('Game cannot be started from state:' + _data.gameState);
+    }
+
     _data.gameState = GAME_STATES.IN_PROGRESS;
     runGoogleJump();
     observer();
@@ -90,21 +109,7 @@ export function playAgain() {
 }
 
 
-
-//getter/selector/query/adapter
-/**
- * 
- * @returns количество баллов, заработанных пользователем
- */
-export function getCatchCount() {
-    return _data.catch;
-}
-
-export function getMissCount() {
-    return _data.miss;
-}
-
-export function catchGoogle() {
+function catchGoogle() {
      stopGoogleJump();
 
      if (_data.catch === _data.settings.pointsToWin) {
@@ -124,9 +129,40 @@ export function catchGoogle() {
     observer();
 }
 
+export function movePlayer1
+
+
+//getter/selector/query
+
+/**
+ * 
+ * @returns количество баллов, заработанных пользователем
+ */
+export function getCatchCount() {
+    return _data.catch;
+}
+
+export function getMissCount() {
+    return _data.miss;
+}
+
 export function getGoogleCoords() {
     return {
         ..._data.heroes.google
+    };
+
+}
+
+export function getPlayer1Coords() {
+    return {
+        ..._data.heroes.player1
+    };
+
+}
+
+export function getPlayer2Coords() {
+    return {
+        ..._data.heroes.player2
     };
 
 }

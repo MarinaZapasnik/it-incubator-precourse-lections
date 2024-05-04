@@ -1,4 +1,5 @@
 import { GameGrid } from './components/GameGrid/game-grid.component.js';
+import { Lose } from './components/Lose/lose.components.js';
 import { ResultPanel } from './components/ResultPanel/result-panel.component.js';
 import { Settings } from './components/Settings/settings.components.js';
 import { Win } from './components/Win/win.components.js';
@@ -26,6 +27,9 @@ export function rerender() {
         case GAME_STATES.WIN:
             rootElement.append(Win());
             break;
+        case GAME_STATES.LOSE:
+            rootElement.append(Lose());
+            break;
         default:
             throw new Error('Not supported state');
     }
@@ -35,7 +39,7 @@ export function rerender() {
 
 rerender();
 
-start();
+//start();
 
 addEventListener(rerender);
 
