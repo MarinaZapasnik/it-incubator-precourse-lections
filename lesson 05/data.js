@@ -21,7 +21,8 @@ const _data = {
             y: 3,
         },
         pointsToWin: 5,
-        pointsToLose: 5
+        pointsToLose: 20,
+        googleJumpInterval: 4000
     },
     catch: 0,
     miss: 0,
@@ -79,7 +80,7 @@ function runGoogleJump() {
             _data.gameState = GAME_STATES.LOSE;
         }
         observer();
-    }, 1000)
+    }, _data.settings.googleJumpInterval)
 }
 
 function stopGoogleJump() {
@@ -139,6 +140,7 @@ function catchGoogle() {
 
 export function movePlayer(playerNumber, direction) {
     validatePlayerNumberOrThrow(playerNumber)
+    
     
     _data.heroes[`player${playerNumber}`].x++
    
