@@ -1,8 +1,8 @@
-import { GameGrid } from './components/GameGrid/game-grid.component.js';
-import { Lose } from './components/Lose/lose.components.js';
-import { ResultPanel } from './components/ResultPanel/result-panel.component.js';
-import { Settings } from './components/Settings/settings.components.js';
-import { Win } from './components/Win/win.components.js';
+import { GameGrid } from './components/Game/GameGrid/game-grid.component.js';
+import { Lose } from './components/Game/Lose/lose.components.js';
+import { ResultPanel } from './components/Game/ResultPanel/result-panel.component.js';
+import { Settings } from './components/Game/Settings/settings.components.js';
+import { Win } from './components/Game/Win/win.components.js';
 import { addEventListener, start, getGameState, GAME_STATES } from './data.js';
 
 

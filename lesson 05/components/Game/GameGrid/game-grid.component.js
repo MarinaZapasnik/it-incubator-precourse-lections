@@ -1,4 +1,5 @@
-import { getGoogleCoords, getGridSizeSettings, getPlayer1Coords, getPlayer2Coords } from "../../data.js";
+
+import { getGoogleCoords, getGridSizeSettings, getPlayer1Coords, getPlayer2Coords } from "../../../data.js";
 import { Google } from "./Google/google.component.js";
 import { Player } from "./Player/player.component.js";
 

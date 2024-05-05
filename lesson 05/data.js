@@ -5,6 +5,14 @@ export const GAME_STATES = {
     LOSE: 'lose'
 }
 
+export const MOVING_DIRECTIONS = {
+    UP: 'up',
+    DOWN: 'down',
+    LEFT: 'left',
+    RIGHT: 'right',
+}
+
+
 const _data = {
     gameState: GAME_STATES.SETTINGS,
     settings: {
@@ -129,8 +137,13 @@ function catchGoogle() {
     observer();
 }
 
-export function movePlayer1
-
+export function movePlayer(playerNumber, direction) {
+    validatePlayerNumberOrThrow(playerNumber)
+    
+    _data.heroes[`player${playerNumber}`].x++
+   
+    observer();
+}
 
 //getter/selector/query
 
@@ -172,6 +185,13 @@ export function getGridSizeSettings() {
         ..._data.settings.gridSize
     };
 }
+
 export function getGameState() {
     return _data.gameState
+}
+
+export function validatePlayerNumberOrThrow(playerNumber) {
+    if (![1,2].some(number => number === playerNumber)) {
+        throw new Error ('Incorrect player number')
+    }
 }
