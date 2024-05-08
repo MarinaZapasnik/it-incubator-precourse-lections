@@ -23,6 +23,22 @@ window.addEventListener('keyup', (event) => {
             movePlayer(1,MOVING_DIRECTIONS.DOWN)
             break;
         }
+        case 'KeyA': {
+            movePlayer(2, MOVING_DIRECTIONS.LEFT);
+            break;
+        }
+        case 'KeyD': {
+            movePlayer(2, MOVING_DIRECTIONS.RIGHT)
+            break;
+        }
+        case 'KeyW': {
+            movePlayer(2,MOVING_DIRECTIONS.UP)
+            break;
+        }
+        case 'KeyS': {
+            movePlayer(2,MOVING_DIRECTIONS.DOWN)
+            break;
+        }
     }
 })
 

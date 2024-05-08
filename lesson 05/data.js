@@ -24,7 +24,10 @@ const _data = {
         pointsToLose: 20,
         googleJumpInterval: 4000
     },
-    catch: 0,
+    catch: {
+        player1:  0,
+        player2: 0
+    },
     miss: 0,
     time: new Date(),
     heroes: {
@@ -40,9 +43,7 @@ const _data = {
 let observer = () => {}
 
 function changeGoogleCoords() {
-    // todo do while prevent generation the same coordinates
-
-
+    
     let newX = _data.heroes.google.x;
     let newY = _data.heroes.google.y;
 
@@ -87,7 +88,6 @@ function stopGoogleJump() {
     clearInterval(jumpIntervalId); 
 }
 
-
 // setter / mutation / command
 export function addEventListener(subscriber) {
     observer = subscriber
@@ -96,6 +96,9 @@ export function addEventListener(subscriber) {
 export function setGridSize(x, y) {
     if (x < 1) throw new Error('Incorrect X grid size settings');
     if (y < 1) throw new Error('Incorrect Y grid size settings');
+
+    _data.settings.gridSize.x = x;
+    _data.settings.gridSize.y = y;
 }
 
 export function start() {
@@ -118,32 +121,77 @@ export function playAgain() {
 }
 
 
-function catchGoogle() {
-     stopGoogleJump();
+function catchGoogle(playerNumber) {
+    stopGoogleJump();
 
-     if (_data.catch === _data.settings.pointsToWin) {
-        return;
-     } 
-    
-    _data.catch++;
+    _data.catch[`player${playerNumber}`]++;
 
-    if (_data.catch === _data.settings.pointsToWin) {
-        _data.gameState =GAME_STATES.WIN;
+    if (_data.catch[`player${playerNumber}`] === _data.settings.pointsToWin) {
+        _data.gameState = GAME_STATES.WIN;
     } else {
         changeGoogleCoords();
-
         runGoogleJump();
     }
 
     observer();
 }
 
+function chekIsCoordsInValidRange(coords) {
+
+    const xIsCorrect = coords.x >= 0 && coords.x < _data.settings.gridSize.x;
+    const yIsCorrect = coords.y >= 0 && coords.y < _data.settings.gridSize.y;
+    
+    return xIsCorrect && yIsCorrect
+}
+
+function coordsMatchWithOtherPlayer(coords) {
+    const player1IsInThisCell = coords.x === _data.heroes.player1.x && coords.y === _data.heroes.player1.y;
+    const player2IsInThisCell = coords.x === _data.heroes.player2.x && coords.y === _data.heroes.player2.y;
+
+    return player1IsInThisCell || player2IsInThisCell
+}
+
+function coordsMatchWithGoogle(coords) {
+    const googleIsInThisCell = coords.x === _data.heroes.google.x && coords.y === _data.heroes.google.y;
+
+    return googleIsInThisCell;
+}
+
 export function movePlayer(playerNumber, direction) {
     validatePlayerNumberOrThrow(playerNumber)
     
     
-    _data.heroes[`player${playerNumber}`].x++
-   
+   const newCoords = {..._data.heroes[`player${playerNumber}`]};
+   switch (direction) {
+        case MOVING_DIRECTIONS.LEFT: {
+            newCoords.x--;
+            break;
+        }
+        case MOVING_DIRECTIONS.RIGHT: {
+            newCoords.x++;
+            break;
+        }
+        case MOVING_DIRECTIONS.UP: {
+            newCoords.y--;
+            break;
+        }
+        case MOVING_DIRECTIONS.DOWN: {
+            newCoords.y++;
+            break;
+        }
+   }
+
+   const isValid = chekIsCoordsInValidRange(newCoords);
+   if (!isValid) return;
+
+   const isMatchWithOtherPlayer = coordsMatchWithOtherPlayer(newCoords);
+   if (isMatchWithOtherPlayer) {
+    catchGoogle(playerNumber)
+   };
+
+   _data.heroes[`player${playerNumber}`] = newCoords;
+
+
     observer();
 }
 
