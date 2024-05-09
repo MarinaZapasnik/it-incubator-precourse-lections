@@ -3,5 +3,5 @@ export function Google() {
 
     element.append('google')
 
-    return element
+    return element;
 }
