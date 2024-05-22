@@ -1,7 +1,9 @@
-export function Button(someTitle) {
+import { data } from "../../data/dataCounter.js";
+
+export function Button() {
 
     const buttonElement = document.createElement('button');
-    buttonElement.innerText = someTitle;
+    buttonElement.innerText = data.buttonTitle;
     return buttonElement;
 
 }

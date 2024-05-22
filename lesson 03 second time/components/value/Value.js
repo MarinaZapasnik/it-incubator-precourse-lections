@@ -1,7 +1,9 @@
-export function Value(someValue) {
+import { data } from "../../data/dataCounter.js";
+
+export function Value() {
 
     const valueElement = document.createElement('div');
-    valueElement.innerText = someValue;
+    valueElement.innerText = data.count;
     return valueElement;
 
 }

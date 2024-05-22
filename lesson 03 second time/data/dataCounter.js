@@ -1,3 +1,5 @@
+import { renderCounter } from "../components/renderCounter.js";
+
 export const data = {
 
     title: 'Counter',
@@ -7,7 +9,15 @@ export const data = {
 }
 
 
-setInterval(function() {
+// setInterval(function() {
+//     data.count++;
+//     console.log(data.count);
+//     // обновляем UI
+//     renderCounter(data)
+// }, 1000)
+
+
+export function increaseCount() {
     data.count++;
-    console.log(data.count)
-}, 1000)
+    renderCounter(data)
+}
