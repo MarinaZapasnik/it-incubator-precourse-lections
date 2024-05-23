@@ -1,4 +1,6 @@
+import { decreaseCount, increaseCount } from "../data/dataCounter.js";
 import { Button } from "./button/Button.js";
+//import { ButtonDec } from "./button/ButtonDec.js";
 import { Header } from "./header/Header.js";
 import { Value } from "./value/Value.js";
 
@@ -13,13 +15,15 @@ export function renderCounter () {
     const value = Value();
 
     //Button
-    const button = Button();
+    const buttonInc = Button('increment', increaseCount);
+    const buttonDec = Button('decrement', decreaseCount);
 
     //render
     document.body.append(
         header,
         value,
-        button
+        buttonInc,
+        buttonDec
     );
 
 }

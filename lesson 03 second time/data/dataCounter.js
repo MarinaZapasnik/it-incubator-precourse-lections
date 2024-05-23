@@ -1,13 +1,12 @@
-import { renderCounter } from "../components/renderCounter.js";
+//import { renderCounter } from "../components/renderCounter.js";
 
 export const data = {
 
     title: 'Counter',
     count: 0,
-    buttonTitle: 'increment'
     
+        
 }
-
 
 // setInterval(function() {
 //     data.count++;
@@ -16,8 +15,28 @@ export const data = {
 //     renderCounter(data)
 // }, 1000)
 
+let changeDataCallBack = function () {
+
+alert('пусто');
+
+}
+
+export function setChangeDataCallBack(newCallBack) {
+    changeDataCallBack = newCallBack;
+}
 
 export function increaseCount() {
+
     data.count++;
-    renderCounter(data)
+    //renderCounter(data)
+    changeDataCallBack();
+
+}
+
+export function decreaseCount() {
+
+    data.count--;
+    //renderCounter(data)
+    changeDataCallBack();
+
 }
