@@ -111,12 +111,84 @@ function App() {
 
 function Header() {
 
-    const Header = document.createElement('header');
+    const header = document.createElement('header');
     const headerContainer = document.createElement('div');
     headerContainer.classList.add('header-container');
 
     const img = document.createElement('img');
-    img.src = './cover.avif';
+    img.src = './logo.png';
+    img.style.height = '30px';
+
+    const logo = document.createElement('div');
+    logo.innerText = 'InPlayer';
+    logo.classList.add('logo-name');
+    
+    headerContainer.append(
+        img,
+        logo
+    );
+
+    header.append(headerContainer);
+
+    return header
+}
+
+function Main () {
+
+    const container = document.createElement('main');
+
+    container.append(
+
+        AddPlayListPanel(),
+        PlayLists()
+
+    )
+
+    return container
+
+}
+
+function AddPlayListPanel() {
+
+    const container = document.createElement('div');
+    container.classList.add('add-playlist-panel');
+
+    const appHeader = document.createElement('h1');
+    appHeader.innerHTML = 'My playlists';
+    appHeader.classList.add('title');
+
+    const addButton = document.createElement('button');
+    addButton.innerText = 'Add Playlist';
+    addButton.classList.add('buttton');
+
+    container.append(
+       appHeader,
+       addButton 
+    )
+
+    return container;
+
+}
+
+function PlayLists () {
+
+    const container = document.createElement('div');
+    container.classList.add('playlists');
+
+    for (let i = 0; data.playlists.length; i++) {
+
+        container.append(Playlist(data.playlists[i]))
+    }
+
+    return container;
+
+
+}
+
+function Playlist (playlist) {
+
+    
+
 }
 
 const root = document.getElementById('root');
