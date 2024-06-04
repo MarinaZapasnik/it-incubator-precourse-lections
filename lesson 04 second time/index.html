@@ -14,10 +14,14 @@
     </style> 
 </head> 
 <body> 
-    <div id="root"></div> 
+    <div id="root">
+        <!-- Todolist -->
+    </div> 
+
     <hr> 
-    <h1>Todolist:</h1> 
+     
     <div> 
+        <h1>Todolist:</h1>
         <ol> 
             <li>Learn HTML <button>❌</button></li> 
             <li>Learn CSS <button>❌</button></li> 
@@ -25,9 +29,11 @@
             <li>Learn React <button>❌</button></li> 
         </ol> 
         <button>+ add</button> 
-        <dialog open> 
+        <dialog> 
             <h4>New Task</h4> 
-            <input placeholder="Input your new task"/> 
+            <input placeholder="Input your new task"/>
+            <button>save</button> 
+            <button>cancel</button>  
         </dialog> 
     </div> 
  

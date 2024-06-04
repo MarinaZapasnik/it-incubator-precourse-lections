@@ -1,7 +1,7 @@
 export const data = {
     todolist: {
         id: crypto.randomUUID(),
-        title: 'Todolist',
+        title: 'Todolist:',
         tasks: [
             {
                 id: crypto.randomUUID(),
@@ -24,5 +24,9 @@ export const data = {
             isOpen: false
         }
     }
+}
+
+export function deleteTask (taskId) {
+    data.todolist.tasks = data.todolist.tasks.filter(t => t.id !== taskId);
 }
 
