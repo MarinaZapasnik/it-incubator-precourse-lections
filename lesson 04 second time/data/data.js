@@ -1,3 +1,4 @@
+
 export const data = {
     todolist: {
         id: crypto.randomUUID(),
@@ -26,7 +27,15 @@ export const data = {
     }
 }
 
+let notifySubscriber = function () {};
+
+export function subscribe (subscriber) {
+    notifySubscriber = subscriber
+
+}
+
 export function deleteTask (taskId) {
     data.todolist.tasks = data.todolist.tasks.filter(t => t.id !== taskId);
+    notifySubscriber();  //  refreshUI()
 }
 
